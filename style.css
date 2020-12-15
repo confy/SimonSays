@@ -1,168 +1,182 @@
-body {
-    margin: 0;
-}
-
-* {
-    font-family: "Poppins";
-}
-
-.pageGrid {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 5em 1fr 5em;
-    grid-template-areas: "header""content""footer";
-}
-
-.footer,
-.header {
-    display: flex;
-    padding: 0 1em;
-    background-color: #2c2f3b;
-    background: linear-gradient(to bottom right, #3a3d4d, #2c2f3b);
-}
-
-.header {
-    grid-area: header;
-    border-bottom: 2px solid #353847;
-}
-
-.footer {
-    grid-area: footer;
-    border-top: 2px solid #353847;
-}
-
-.footer *,
-.header * {
-    margin: auto;
-}
-
-h1,
-h2,
-h3,
-p {
-    color: #fff;
-}
-
-h1#name {
-    font-weight: 300;
-    font-style: italic;
-}
-
-.content {
-    background-color: #3a3d4d;
-    grid-area: content;
-}
-
-.content {
-    height: 100%;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(to bottom right, #43475a, #3a3d4d);
-}
-
-.game {
-    display: flex;
-    flex-flow: column nowrap;
-}
-
-.gameTop {
-    padding: 1em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.gameTop h2 {
-    margin: 0;
-}
-
-.gameButtons {
-    display: grid;
-    grid-template-rows: repeat(3, 7em);
-    grid-template-columns: repeat(3, 7em);
-    gap: 2em;
-}
-
-.gameBottom {
-    height: 2em;
-    padding: 1em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.gameBottom h3 {
-    margin: 0;
-}
-
-.gameBottom select {
-    color: #fff;
-    background-color: #333544;
-    justify-self: center;
-}
-
-.gamebutton {
-    display: inline-block;
-    background: linear-gradient(to bottom right, #4a4e63, #3a3d4d);
-    border-radius: 2em;
-    border: 1px solid #363738;
-    background-clip: padding-box;
-    box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25), -8px -8px 12px 0 rgba(198, 228, 253, 0.17);
-}
-
-div.gamebutton:active {
-    background: #4EC5F1;
-    box-shadow: inset 0 0 16px #000000;
-}
-
-button.other {
-    font-weight: lighter;
-    box-shadow: inset 0px 0px 14px 3px #303447;
-    background: linear-gradient(to bottom, #3a3d4d 5%, #31323d 100%);
-    background-color: #3a3d4d;
-    border-radius: 9px;
-    border: 1px solid #181f26;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 16px;
-    padding: 2px 10px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #3a3d4d;
-}
-
-button.other:hover {
-    background: linear-gradient(to bottom, #31323d 5%, #3a3d4d 100%);
-    background-color: #31323d;
-}
-
-button.other:active {
-    position: relative;
-    top: 1px;
-}
-
-button.orange {
-    background-color: #f4b367;
-}
-
-button.purple {
-    background-color: #a682ff;
-}
-
-button.blue {
-    background-color: #63c4cf;
-}
-
-button.pink {
-    background-color: #ef476f;
-}
-
-@media only screen and (min-width: 640px) {
-    .gameButtons {
-        display: grid;
-        grid-template-rows: repeat(3, 10em);
-        grid-template-columns: repeat(3, 10em);
-        gap: 2em;
-    }
-}
+                                body {
+                                    margin: 0;
+                                }
+                                
+                                * {
+                                    font-family: "Poppins";
+                                }
+                                
+                                .pageGrid {
+                                    height: 100vh;
+                                    display: grid;
+                                    grid-template-columns: 1fr;
+                                    grid-template-rows: 5em 1fr 5em;
+                                    grid-template-areas: "header""content""footer";
+                                }
+                                
+                                .footer,
+                                .header {
+                                    display: flex;
+                                    padding: 0 1em;
+                                    background-color: #2c2f3b;
+                                    background: linear-gradient(to bottom right, #3a3d4d, #2c2f3b);
+                                }
+                                
+                                .header {
+                                    grid-area: header;
+                                    border-bottom: 2px solid #353847;
+                                }
+                                
+                                .footer {
+                                    grid-area: footer;
+                                    border-top: 2px solid #353847;
+                                }
+                                
+                                .footer *,
+                                .header * {
+                                    margin: auto;
+                                }
+                                
+                                h1,
+                                h2,
+                                h3,
+                                p {
+                                    color: #fff;
+                                }
+                                
+                                h1#name {
+                                    font-weight: 300;
+                                    font-style: italic;
+                                }
+                                
+                                h1 {
+                                    font-size: 1.5em;
+                                }
+                                
+                                .content {
+                                    background-color: #3a3d4d;
+                                    grid-area: content;
+                                }
+                                
+                                .content {
+                                    height: 100%;
+                                    display: grid;
+                                    place-items: center;
+                                    background: linear-gradient(to bottom right, #43475a, #3a3d4d);
+                                }
+                                
+                                .game {
+                                    display: flex;
+                                    flex-flow: column nowrap;
+                                }
+                                
+                                .gameTop {
+                                    padding: 1em;
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: space-between;
+                                }
+                                
+                                .gameTop h2 {
+                                    margin: 0;
+                                }
+                                
+                                .gameButtons {
+                                    display: grid;
+                                    grid-template-rows: repeat(3, 6em);
+                                    grid-template-columns: repeat(3, 6em);
+                                    gap: 1em;
+                                }
+                                
+                                .gameBottom {
+                                    height: 2em;
+                                    padding: 1em;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                }
+                                
+                                .gameBottom h3 {
+                                    margin: 0;
+                                }
+                                
+                                .gameBottom select {
+                                    color: #fff;
+                                    background-color: #333544;
+                                    justify-self: center;
+                                }
+                                
+                                .gamebutton {
+                                    display: inline-block;
+                                    background: linear-gradient(to bottom right, #4a4e63, #3a3d4d);
+                                    border-radius: 1em;
+                                    border: 1px solid #363738;
+                                    background-clip: padding-box;
+                                    box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.25), -4px -4px 6px 0 rgba(198, 228, 253, 0.17);
+                                }
+                                
+                                div.gamebutton:active {
+                                    background: #4EC5F1;
+                                    box-shadow: inset 0 0 16px #000000;
+                                }
+                                
+                                button.other {
+                                    font-weight: lighter;
+                                    box-shadow: inset 0px 0px 14px 3px #303447;
+                                    background: linear-gradient(to bottom, #3a3d4d 5%, #31323d 100%);
+                                    background-color: #3a3d4d;
+                                    border-radius: 9px;
+                                    border: 1px solid #181f26;
+                                    display: inline-block;
+                                    cursor: pointer;
+                                    color: #ffffff;
+                                    font-size: 16px;
+                                    padding: 2px 10px;
+                                    text-decoration: none;
+                                    text-shadow: 0px 1px 0px #3a3d4d;
+                                }
+                                
+                                button.other:hover {
+                                    background: linear-gradient(to bottom, #31323d 5%, #3a3d4d 100%);
+                                    background-color: #31323d;
+                                }
+                                
+                                button.other:active {
+                                    position: relative;
+                                    top: 1px;
+                                }
+                                
+                                button.orange {
+                                    background-color: #f4b367;
+                                }
+                                
+                                button.purple {
+                                    background-color: #a682ff;
+                                }
+                                
+                                button.blue {
+                                    background-color: #63c4cf;
+                                }
+                                
+                                button.pink {
+                                    background-color: #ef476f;
+                                }
+                                
+                                @media only screen and (min-width: 640px) {
+                                    .gameButtons {
+                                        display: grid;
+                                        grid-template-rows: repeat(3, 10em);
+                                        grid-template-columns: repeat(3, 10em);
+                                        gap: 2em;
+                                    }
+                                    .gamebutton {
+                                        border-radius: 2em;
+                                        box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25), -8px -8px 12px 0 rgba(198, 228, 253, 0.17);
+                                    }
+                                    div.gamebutton:active {
+                                        box-shadow: inset 0 0 16px #000000;
+                                    }
+                                    .gameBottom {
+                                        flex-direction: row;
+                                    }
+                                }
