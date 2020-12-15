@@ -1,0 +1,92 @@
+html,
+body,
+.pageGrid {
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    font-family: "Poppins";
+}
+
+.pageGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 5em 1fr 5em;
+    gap: 0px 0px;
+    grid-template-areas: "header" "content" "footer";
+}
+
+.footer,
+.header {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    padding: 0 1em;
+    background-color: 27;
+    background-color: #262833;
+}
+
+.header {
+    grid-area: header;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+h1 {
+    margin: auto;
+    color: aliceblue;
+}
+
+.header h1#name {
+    font-weight: 300;
+    font-style: italic;
+}
+
+.content {
+    background-color: #3a3d4d;
+    grid-area: content;
+}
+
+.button {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 1em;
+    border: solid 2px transparent;
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+
+button.orange {
+    background-color: #f4b367;
+}
+
+button.purple {
+    background-color: #a682ff;
+}
+
+button.blue {
+    background-color: #63c4cf;
+}
+
+button.pink {
+    background-color: #ef476f;
+}
+
+.game {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background-color: #3a3d4d;
+}
+
+.gameButtons {
+    display: grid;
+    grid-template-rows: repeat(3, 10em);
+    grid-template-columns: repeat(3, 10em);
+}
