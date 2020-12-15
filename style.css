@@ -17,10 +17,7 @@ body {
 .footer,
 .header {
     display: flex;
-    flex-flow: column wrap;
-    align-items: center;
     padding: 0 1em;
-    background-color: 27;
     background-color: #262833;
 }
 
@@ -32,6 +29,11 @@ body {
     grid-area: footer;
 }
 
+.footer *,
+.header * {
+    margin: auto;
+}
+
 h1,
 h2,
 h3,
@@ -39,12 +41,7 @@ p {
     color: #fff;
 }
 
-.footer *,
-.header * {
-    margin: auto;
-}
-
-.header h1#name {
+h1#name {
     font-weight: 300;
     font-style: italic;
 }
@@ -52,62 +49,6 @@ p {
 .content {
     background-color: #3a3d4d;
     grid-area: content;
-}
-
-.gamebutton {
-    display: inline-block;
-    background-color: #3A3D4D;
-    border-radius: 1em;
-    border: 1px solid #181f26;
-    background-clip: padding-box;
-    box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.17), -8px -8px 12px 0 rgba(255, 255, 255, 0.15);
-}
-
-button.other {
-    font-weight: lighter;
-    box-shadow: inset 0px 0px 14px 3px #303447;
-    background: linear-gradient(to bottom, #3a3d4d 5%, #31323d 100%);
-    background-color: #3a3d4d;
-    border-radius: 9px;
-    border: 1px solid #181f26;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 16px;
-    padding: 2px 10px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #3a3d4d;
-}
-
-button.other:hover {
-    background: linear-gradient(to bottom, #31323d 5%, #3a3d4d 100%);
-    background-color: #31323d;
-}
-
-button.other:active {
-    position: relative;
-    top: 1px;
-}
-
-div.gamebutton:active {
-    background-color: #63c4cf;
-    box-shadow: inset 0 0 16px #000000;
-}
-
-button.orange {
-    background-color: #f4b367;
-}
-
-button.purple {
-    background-color: #a682ff;
-}
-
-button.blue {
-    background-color: #63c4cf;
-}
-
-button.pink {
-    background-color: #ef476f;
 }
 
 .content {
@@ -156,4 +97,60 @@ button.pink {
     color: #fff;
     background-color: #333544;
     justify-self: center;
+}
+
+.gamebutton {
+    display: inline-block;
+    background: linear-gradient(to bottom right, #4a4e63, #3a3d4d);
+    border-radius: 2em;
+    border: 1px solid #363738;
+    background-clip: padding-box;
+    box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25), -8px -8px 12px 0 rgba(198, 228, 253, 0.17);
+}
+
+div.gamebutton:active {
+    background: #4EC5F1;
+    box-shadow: inset 0 0 16px #000000;
+}
+
+button.other {
+    font-weight: lighter;
+    box-shadow: inset 0px 0px 14px 3px #303447;
+    background: linear-gradient(to bottom, #3a3d4d 5%, #31323d 100%);
+    background-color: #3a3d4d;
+    border-radius: 9px;
+    border: 1px solid #181f26;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 2px 10px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #3a3d4d;
+}
+
+button.other:hover {
+    background: linear-gradient(to bottom, #31323d 5%, #3a3d4d 100%);
+    background-color: #31323d;
+}
+
+button.other:active {
+    position: relative;
+    top: 1px;
+}
+
+button.orange {
+    background-color: #f4b367;
+}
+
+button.purple {
+    background-color: #a682ff;
+}
+
+button.blue {
+    background-color: #63c4cf;
+}
+
+button.pink {
+    background-color: #ef476f;
 }
