@@ -18,15 +18,18 @@ body {
 .header {
     display: flex;
     padding: 0 1em;
-    background-color: #262833;
+    background-color: #2c2f3b;
+    background: linear-gradient(to bottom right, #3a3d4d, #2c2f3b);
 }
 
 .header {
     grid-area: header;
+    border-bottom: 2px solid #353847;
 }
 
 .footer {
     grid-area: footer;
+    border-top-style: 40px solid #000000;
 }
 
 .footer *,
@@ -55,7 +58,7 @@ h1#name {
     height: 100%;
     display: grid;
     place-items: center;
-    background-color: #3a3d4d;
+    background: linear-gradient(to bottom right, #43475a, #3a3d4d);
 }
 
 .game {
