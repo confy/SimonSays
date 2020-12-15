@@ -38,9 +38,16 @@ body {
     grid-area: footer;
 }
 
-h1 {
+h1,
+h2,
+h3,
+p {
+    color: #fff;
+}
+
+.footer *,
+.header * {
     margin: auto;
-    color: aliceblue;
 }
 
 .header h1#name {
@@ -53,13 +60,38 @@ h1 {
     grid-area: content;
 }
 
-.button {
+.gamebutton {
     display: inline-block;
-    background-color: #fff;
+    background-color: #5a5c72;
     border-radius: 1em;
     border: solid 2px transparent;
     background-clip: padding-box;
     box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+
+button.other {
+    box-shadow: inset 0px 0px 14px 3px #303447;
+    background: linear-gradient(to bottom, #3a3d4d 5%, #31323d 100%);
+    background-color: #3a3d4d;
+    border-radius: 9px;
+    border: 1px solid #181f26;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 2px 10px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #3a3d4d;
+}
+
+button.other:hover {
+    background: linear-gradient(to bottom, #31323d 5%, #3a3d4d 100%);
+    background-color: #31323d;
+}
+
+button.other:active {
+    position: relative;
+    top: 1px;
 }
 
 button.orange {
@@ -78,15 +110,49 @@ button.pink {
     background-color: #ef476f;
 }
 
-.game {
+.content {
     height: 100%;
     display: grid;
     place-items: center;
     background-color: #3a3d4d;
 }
 
+.game {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.gameTop {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.gameTop h2 {
+    margin: 0;
+}
+
 .gameButtons {
     display: grid;
     grid-template-rows: repeat(3, 10em);
     grid-template-columns: repeat(3, 10em);
+}
+
+.gameBottom {
+    height: 2em;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.gameBottom h3 {
+    margin: 0;
+}
+
+.gameBottom select {
+    color: #fff;
+    background-color: #333544;
+    justify-self: center;
 }
