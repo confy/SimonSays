@@ -106,7 +106,7 @@ h1 {
     justify-self: center;
 }
 
-.gamebutton {
+.gameButtons * {
     display: inline-block;
     background: linear-gradient(to bottom right, #4a4e63, #3a3d4d);
     border-radius: 1em;
@@ -115,9 +115,48 @@ h1 {
     box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.25), -4px -4px 6px 0 rgba(198, 228, 253, 0.17);
 }
 
-div.gamebutton:active {
-    background: #4ec5f1;
-    box-shadow: inset 0 0 16px #000000;
+div[id^="btn"] {
+    opacity: 100%;
+}
+
+.gameButtons *:active {
+    box-shadow: inset 0px 0px 40px #141414;
+}
+
+#btn1.on {
+    background: #f2e785;
+}
+
+#btn2.on {
+    background: #f4ef85;
+}
+
+#btn3.on {
+    background: #f5fd8e;
+}
+
+#btn4.on {
+    background: #e38747;
+}
+
+#btn5.on {
+    background: #e58d49;
+}
+
+#btn6.on {
+    background: #eab562;
+}
+
+#btn7.on {
+    background: #dc4e3e;
+}
+
+#btn8.on {
+    background: #df6443;
+}
+
+#btn9.on {
+    background: #e58c5e;
 }
 
 button.other {
@@ -162,19 +201,19 @@ button.pink {
     background-color: #ef476f;
 }
 
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 640px) and (min-height: 1000px) {
+    button.other {
+        width: 7.5em;
+    }
     .gameButtons {
         display: grid;
         grid-template-rows: repeat(3, 10em);
         grid-template-columns: repeat(3, 10em);
         gap: 2em;
     }
-    .gamebutton {
+    .gameButtons * {
         border-radius: 2em;
         box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25), -8px -8px 12px 0 rgba(198, 228, 253, 0.17);
-    }
-    div.gamebutton:active {
-        box-shadow: inset 0 0 16px #000000;
     }
     .gameBottom {
         flex-direction: row;
