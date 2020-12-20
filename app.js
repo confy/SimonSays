@@ -1,3 +1,4 @@
+// Globals
 var _dom_ = {
     "gameButtons": document.querySelector(".gameButtons"),
     "reset": document.querySelector("#reset"),
@@ -18,55 +19,54 @@ var _scales = {
 }
 
 class button {
-    constructor(id, freq) {
+    constructor(id, freq, tick) {
         this.id = id
         this.freq = freq
+        this.tick = tick
         this.btnElem = document.querySelector(`#btn${id}`)
     }
     activate() {
         this.btnElem.classlist.toggle("on")
+            // todo 
+            // flash
+            // activate sound
+            // wait tick length
     }
+    changeFreq(freq) {
+        this.freq = freq
+    }
+}
+
+function constructBtns(scale, tick) {
+    var buttons = []
+    for (let i = 1; i <= 9; i++) {
+        buttons.push(new button(i, scale[i - 1], tick))
+    }
+    return buttons
 }
 class Game {
     constructor(scale) {
         this.scale = scale
-        this.buttons = constructButtons(scale)
-        this.tickrate = 20
+        this.tickrate = 2
+        this.buttons = constructBtns(_scales.pentatonic, this.tickrate)
         this.moves = [5]
         this.score = 1
         this.waiting = false
         this.flash = true
         this.scale = scale
-
-
     }
 }
-var game = new Game("pentatonic")
 
-function constructButtons(scale) {
-    var buttons = {}
-    for (let i = 0; i < 9; i++) {
-        buttons[`btn${i}`] = new button(i, scale[i])
-    }
+var game = new Game(_dom_.scaleSelect.value)
+
+function resetGame() {
+    game = new Game(_dom_.scaleSelect.value)
 }
-_dom_.gameButtons.addEventListener("click", (e) => {
-    var id = e.target.id
-    game.buttons[`${id}`].classlist.toggle("on")
-
-
-})
-
-window.addEventListener("load", function() {
-    let str = JSON.stringify(game.buttons, null, 4); // (Optional) beautiful indented output.
-    console.log(str);
+window.addEventListener('load', (event) => {
+    resetGame()
+    console.log('page is fully loaded');
 });
 
-function main() {
-    console.log("HELP")
-
-
-
-
-}
-
-main()
+_dom_.reset.addEventListener('click', () => {
+    resetGame()
+})
