@@ -17,7 +17,6 @@ var _scales = {
         783.99
     ]
 }
-
 class button {
     constructor(id, freq, tick) {
         this.id = id
@@ -26,7 +25,12 @@ class button {
         this.btnElem = document.querySelector(`#btn${id}`)
     }
     activate() {
-        this.btnElem.classlist.toggle("on")
+        console.log(this.id)
+        this.btnElem.classList.toggle("on")
+        setTimeout(() => {
+                this.btnElem.classList.toggle("on")
+
+            }, this.tick)
             // todo 
             // flash
             // activate sound
@@ -39,7 +43,7 @@ class button {
 
 function constructBtns(scale, tick) {
     var buttons = []
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 0; i <= 9; i++) {
         buttons.push(new button(i, scale[i - 1], tick))
     }
     return buttons
@@ -47,7 +51,8 @@ function constructBtns(scale, tick) {
 class Game {
     constructor(scale) {
         this.scale = scale
-        this.tickrate = 2
+        this.tickrate = 750
+        this.break = this.tickrate / 3
         this.buttons = constructBtns(_scales.pentatonic, this.tickrate)
         this.moves = [5]
         this.score = 1
@@ -62,11 +67,17 @@ var game = new Game(_dom_.scaleSelect.value)
 function resetGame() {
     game = new Game(_dom_.scaleSelect.value)
 }
-window.addEventListener('load', (event) => {
-    resetGame()
-    console.log('page is fully loaded');
-});
 
 _dom_.reset.addEventListener('click', () => {
     resetGame()
+})
+
+_dom_.gameButtons.addEventListener('click', (e) => {
+    if (e.target == _dom_.gameButtons) {
+        return
+    } else {
+        let id = e.target.id
+        let numID = Number(id.slice(3, 4))
+        game.buttons[numID].activate()
+    }
 })

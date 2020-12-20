@@ -119,7 +119,7 @@ div[id^="btn"] {
     opacity: 100%;
 }
 
-.gameButtons *:active {
+div[id^="btn"].on {
     box-shadow: inset 0px 0px 40px #141414;
 }
 
