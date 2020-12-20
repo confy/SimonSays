@@ -23,18 +23,16 @@ class button {
         this.freq = freq
         this.tick = tick
         this.btnElem = document.querySelector(`#btn${id}`)
+        this.lastClick = 0
     }
     activate() {
-        console.log(this.id)
+        if (this.btnElem.classList.contains("on")) {
+            return
+        }
         this.btnElem.classList.toggle("on")
         setTimeout(() => {
-                this.btnElem.classList.toggle("on")
-
-            }, this.tick)
-            // todo 
-            // flash
-            // activate sound
-            // wait tick length
+            this.btnElem.classList.toggle("on")
+        }, this.tick)
     }
     changeFreq(freq) {
         this.freq = freq
