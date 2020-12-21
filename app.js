@@ -27,10 +27,10 @@ class button {
         this.sound = new Pizzicato.Sound({
             source: 'wave',
             options: {
-                type: "sine",
+                type: "sawtooth",
                 frequency: this.freq,
-                volume: 0.5,
-                release: tick / 700,
+                volume: 0.2,
+                release: tick / 500,
                 attack: tick / 10000
 
             }
@@ -65,19 +65,10 @@ function constructBtns(scale, tick) {
 class Game {
     constructor(scale) {
         this.scale = scale
-        this.tickrate = 1000
+        this.tickrate = 400
         this.break = this.tickrate / 3
         this.buttons = constructBtns(_scales.pentatonic, this.tickrate)
-        this.btnSounds = []
-
-        this.reverb = new Pizzicato.Effects.Reverb({
-            time: 2,
-            decay: 1,
-            reverse: false,
-            mix: 1
-        });
-        // this.btnSounds.addEffect(this.reverb);
-        this.moves = [5]
+        this.moves = [1, 2, 3, 4]
         this.score = 1
         this.listen = false
         this.flash = true
@@ -85,30 +76,48 @@ class Game {
 
     }
     playMoves() {
-        // run one set of moves - block input
-        this.moves.forEach((move) => {
-            buttons[move].activate()
+        this.listen = false
+        this.moves.forEach((move, i) => {
+            setTimeout(() => {
+                this.buttons[move].activate()
+            }, 2 * i * this.tickrate)
         })
-        return
+        this.listen = true
+    }
+    listenMoves() {
+
+    }
+    btnFlash() {
+        this.listen = false
+        let flashMoves = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+        flashMoves.forEach((move, i) => {
+            setTimeout(() => {
+                this.buttons[move].activate()
+            }, 2 * i * this.tickrate / 5)
+        })
+        this.listen = true
     }
 }
 
-var game = new Game(_dom_.scaleSelect.value)
 
 function resetGame() {
-    game = new Game(_dom_.scaleSelect.value)
+    return new Game(_dom_.scaleSelect.value)
+
 }
+var currGame = resetGame()
 
 _dom_.reset.addEventListener('click', () => {
     resetGame()
+    _dom_.reset.innerHTML = "Reset"
+    currGame.playMoves()
 })
 
 _dom_.gameButtons.addEventListener('click', (e) => {
-    if (e.target == _dom_.gameButtons) {
+    if (e.target == _dom_.gameButtons || currGame.listen == false) {
         return
     } else {
         let id = e.target.id
         let numID = Number(id.slice(3, 4))
-        game.buttons[numID].activate()
+        currGame.buttons[numID].activate()
     }
 })
