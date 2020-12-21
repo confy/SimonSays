@@ -211,6 +211,6 @@ button.pink {
         display: grid;
         grid-template-rows: repeat(3, 14em);
         grid-template-columns: repeat(3, 14em);
-        gap: 2em;
+        gap: 3em;
     }
 }
