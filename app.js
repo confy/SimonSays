@@ -20,18 +20,22 @@ var _scales = {
 class button {
     constructor(id, freq, tick) {
         this.id = id
-        this.freq = freq
+        this.freq = freq / 1
         this.tick = tick
         this.btnElem = document.querySelector(`#btn${id}`)
         this.lastClick = 0
         this.sound = new Pizzicato.Sound({
             source: 'wave',
             options: {
-                frequency: freq
+                type: "sine",
+                frequency: this.freq,
+                volume: 0.5,
+                release: tick / 700,
+                attack: tick / 10000
+
             }
         })
-        this.sound.attack = tick / 2000
-        this.sound.release = tick / 1000
+
     }
     playSound() {
         this.sound.play()
@@ -49,9 +53,6 @@ class button {
             this.btnElem.classList.toggle("on")
         }, this.tick)
     }
-    changeFreq(freq) {
-        this.freq = freq
-    }
 }
 
 function constructBtns(scale, tick) {
@@ -64,17 +65,30 @@ function constructBtns(scale, tick) {
 class Game {
     constructor(scale) {
         this.scale = scale
-        this.tickrate = 750
+        this.tickrate = 1000
         this.break = this.tickrate / 3
         this.buttons = constructBtns(_scales.pentatonic, this.tickrate)
+        this.btnSounds = []
+
+        this.reverb = new Pizzicato.Effects.Reverb({
+            time: 2,
+            decay: 1,
+            reverse: false,
+            mix: 1
+        });
+        // this.btnSounds.addEffect(this.reverb);
         this.moves = [5]
         this.score = 1
-        this.waiting = false
+        this.listen = false
         this.flash = true
         this.scale = scale
 
     }
     playMoves() {
+        // run one set of moves - block input
+        this.moves.forEach((move) => {
+            buttons[move].activate()
+        })
         return
     }
 }
