@@ -120,7 +120,7 @@ div[id^="btn"] {
 }
 
 div[id^="btn"].on {
-    box-shadow: inset 0px 0px 40px #141414;
+    box-shadow: inset 0px 0px 20px #141414;
 }
 
 #btn1.on {

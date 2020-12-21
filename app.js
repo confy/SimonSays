@@ -1,4 +1,3 @@
-// Globals
 var _dom_ = {
     "gameButtons": document.querySelector(".gameButtons"),
     "reset": document.querySelector("#reset"),
@@ -17,6 +16,7 @@ var _scales = {
         783.99
     ]
 }
+
 class button {
     constructor(id, freq, tick) {
         this.id = id
@@ -24,11 +24,26 @@ class button {
         this.tick = tick
         this.btnElem = document.querySelector(`#btn${id}`)
         this.lastClick = 0
+        this.sound = new Pizzicato.Sound({
+            source: 'wave',
+            options: {
+                frequency: freq
+            }
+        })
+        this.sound.attack = tick / 2000
+        this.sound.release = tick / 1000
+    }
+    playSound() {
+        this.sound.play()
+        setTimeout(() => {
+            this.sound.stop()
+        }, this.tick)
     }
     activate() {
         if (this.btnElem.classList.contains("on")) {
             return
         }
+        this.playSound()
         this.btnElem.classList.toggle("on")
         setTimeout(() => {
             this.btnElem.classList.toggle("on")
@@ -57,6 +72,10 @@ class Game {
         this.waiting = false
         this.flash = true
         this.scale = scale
+
+    }
+    playMoves() {
+        return
     }
 }
 
