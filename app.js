@@ -8,7 +8,8 @@ var _dom_ = {
 var scales = {
     "pentatonic": [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99],
     "ionian": [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33],
-    "dorian": [261.63, 293.66, 311.13, 349.23, 392.00, 440.00, 466.16, 523.25, 587.33]
+    "dorian": [261.63, 293.66, 311.13, 349.23, 392.00, 440.00, 466.16, 523.25, 587.33],
+    "phrygian": [261.63, 277.18, 329.63, 349.23, 392.00, 415.30, 466.16, 523.25, 554.36]
 }
 
 var waveforms = ["sine", "square", "triangle", "sawtooth"]
@@ -25,8 +26,9 @@ class button {
                 type: wave,
                 frequency: this.freq,
                 volume: 0.2,
-                release: tick / 5000,
-                attack: tick / 10000
+                release: tick / 1000,
+                attack: 0.1
+
             }
         })
     }
@@ -41,7 +43,6 @@ class button {
             return
         }
         this.playSound()
-
         this.btnElem.classList.toggle("on")
         setTimeout(() => {
             this.btnElem.classList.toggle("on")
@@ -69,7 +70,7 @@ class Game {
     constructor(scale, wave) {
         this.gameState = "ongoing"
         this.scale = scale
-        this.tickrate = 400
+        this.tickrate = 300
         this.break = this.tickrate / 3
         this.wave = wave
         this.buttons = constructBtns(scales[this.scale], this.tickrate, this.wave)
@@ -93,7 +94,6 @@ class Game {
     }
     recordMove(userMove) {
         if (userMove != this.moves[this.currUserMoveID - 1]) {
-            this.gameState = "ended"
             return "wrong"
         } else {
             if (this.currUserMoveID == this.moves.length) {
@@ -107,14 +107,16 @@ class Game {
 
     }
     btnFlash() {
+        this.gameState = "ended"
         this.listen = false
-        let flashMoves = [9, 8, 7, 8, 7, 6, 7, 6, 5, 6, 5, 4, 5, 4, 3, 4, 3, 2, 3, 2, 1]
+        let flashMoves = [8, 7, 6, 5, 4, 3, 2, 1]
         flashMoves.forEach((move, i) => {
             setTimeout(() => {
                 this.buttons[move].activate()
-            }, 2 * i * this.tickrate / 3)
+            }, 2 * i * this.tickrate / 2.5)
         })
         this.listen = true
+
     }
 }
 
@@ -132,13 +134,15 @@ _dom_.reset.addEventListener('click', () => {
 })
 
 _dom_.gameButtons.addEventListener('click', (e) => {
-    if (e.target == _dom_.gameButtons || currGame.listen == false) {
+    //    if (e.target == _dom_.gameButtons || currGame.listen == false) {
+
+    if (e.target == _dom_.gameButtons) {
         return
     } else {
         let id = e.target.id
         let numID = Number(id.slice(3, 4))
         currGame.buttons[numID].activate()
-        if (currGame.gameState = "ongoing") {
+        if (currGame.gameState == "ongoing") {
             ret = currGame.recordMove(numID)
             if (ret == "correct") {
                 return
