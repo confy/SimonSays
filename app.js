@@ -2,9 +2,11 @@ var _dom_ = {
     "gameButtons": document.querySelector(".gameButtons"),
     "reset": document.querySelector("#reset"),
     "scaleSelect": document.querySelector("#scales"),
+    "waveSelect": document.querySelector("#waves"),
     "score": document.querySelector("#score")
+
 }
-var _scales = {
+var scales = {
     "pentatonic": [261.63,
         293.66,
         329.63,
@@ -17,8 +19,11 @@ var _scales = {
     ]
 }
 
+var waveforms = ["sine", "square", "triangle", "sawtooth"]
+
+
 class button {
-    constructor(id, freq, tick) {
+    constructor(id, freq, tick, wave) {
         this.id = id
         this.freq = freq / 1
         this.tick = tick
@@ -27,10 +32,10 @@ class button {
         this.sound = new Pizzicato.Sound({
             source: 'wave',
             options: {
-                type: "sawtooth",
+                type: wave,
                 frequency: this.freq,
                 volume: 0.2,
-                release: tick / 500,
+                release: tick / 5000,
                 attack: tick / 10000
 
             }
@@ -48,30 +53,41 @@ class button {
             return
         }
         this.playSound()
+
         this.btnElem.classList.toggle("on")
         setTimeout(() => {
             this.btnElem.classList.toggle("on")
         }, this.tick)
+
     }
 }
 
-function constructBtns(scale, tick) {
-    var buttons = []
+
+function constructBtns(scale, tick, wave) {
+    let buttons = []
     for (let i = 0; i <= 9; i++) {
-        buttons.push(new button(i, scale[i - 1], tick))
+        let btnWave = ""
+        if (wave == "rand") {
+            var randWave = waveforms[Math.floor(Math.random() * waveforms.length)]
+            btnWave = randWave
+        } else {
+            btnWave = wave
+        }
+        buttons.push(new button(i, scale[i - 1], tick, btnWave))
     }
     return buttons
 }
 class Game {
     constructor(scale) {
+        this.gameState = "ongoing"
         this.scale = scale
         this.tickrate = 400
         this.break = this.tickrate / 3
-        this.buttons = constructBtns(_scales.pentatonic, this.tickrate)
-        this.moves = [1, 2, 3, 4]
+        this.wave = _dom_.waveSelect.value
+        this.buttons = constructBtns(scales.pentatonic, this.tickrate, this.wave)
+        this.moves = [Number(1 + Math.floor(Math.random() * 9))]
         this.score = 1
         this.listen = false
-        this.flash = true
         this.scale = scale
 
     }
@@ -89,11 +105,11 @@ class Game {
     }
     btnFlash() {
         this.listen = false
-        let flashMoves = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+        let flashMoves = [9, 8, 7, 8, 7, 6, 7, 6, 5, 6, 5, 4, 5, 4, 3, 4, 3, 2, 3, 2, 1]
         flashMoves.forEach((move, i) => {
             setTimeout(() => {
                 this.buttons[move].activate()
-            }, 2 * i * this.tickrate / 5)
+            }, 2 * i * this.tickrate / 3)
         })
         this.listen = true
     }
@@ -104,20 +120,22 @@ function resetGame() {
     return new Game(_dom_.scaleSelect.value)
 
 }
-var currGame = resetGame()
+currGame = resetGame()
 
 _dom_.reset.addEventListener('click', () => {
-    resetGame()
+    currGame = resetGame()
     _dom_.reset.innerHTML = "Reset"
-    currGame.playMoves()
+    currGame.btnFlash()
 })
 
 _dom_.gameButtons.addEventListener('click', (e) => {
     if (e.target == _dom_.gameButtons || currGame.listen == false) {
         return
     } else {
-        let id = e.target.id
-        let numID = Number(id.slice(3, 4))
-        currGame.buttons[numID].activate()
+        if (currGame.gameState = "ongoing") {
+            let id = e.target.id
+            let numID = Number(id.slice(3, 4))
+            currGame.buttons[numID].activate()
+        }
     }
 })
