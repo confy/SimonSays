@@ -4,24 +4,14 @@ var _dom_ = {
     "scaleSelect": document.querySelector("#scales"),
     "waveSelect": document.querySelector("#waves"),
     "score": document.querySelector("#score")
-
 }
 var scales = {
-    "pentatonic": [261.63,
-        293.66,
-        329.63,
-        392.00,
-        440.00,
-        523.25,
-        587.33,
-        659.25,
-        783.99
-    ]
+    "pentatonic": [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99],
+    "ionian": [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33],
+    "dorian": [261.63, 293.66, 311.13, 349.23, 392.00, 440.00, 466.16, 523.25, 587.33]
 }
 
 var waveforms = ["sine", "square", "triangle", "sawtooth"]
-
-
 class button {
     constructor(id, freq, tick, wave) {
         this.id = id
@@ -37,10 +27,8 @@ class button {
                 volume: 0.2,
                 release: tick / 5000,
                 attack: tick / 10000
-
             }
         })
-
     }
     playSound() {
         this.sound.play()
@@ -84,12 +72,11 @@ class Game {
         this.tickrate = 400
         this.break = this.tickrate / 3
         this.wave = wave
-        this.buttons = constructBtns(scales.pentatonic, this.tickrate, this.wave)
+        this.buttons = constructBtns(scales[this.scale], this.tickrate, this.wave)
         this.moves = [1 + Math.floor(Math.random() * 9)]
         this.currUserMoveID = 1
         this.score = 1
         this.listen = false
-        this.scale = scale
 
     }
     addMove() {
@@ -100,7 +87,7 @@ class Game {
         this.moves.forEach((move, i) => {
             setTimeout(() => {
                 this.buttons[move].activate()
-            }, 1000 + 2 * i * this.tickrate)
+            }, 1200 + 2 * i * this.tickrate)
         })
         this.listen = true
     }
