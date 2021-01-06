@@ -80,7 +80,6 @@ class button {
         if (this.btnElem.classList.contains("on")) {
             return
         }
-        console.log(this.freq)
         this.playSound()
         this.btnElem.classList.toggle("on")
         setTimeout(() => {
