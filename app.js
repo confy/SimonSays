@@ -50,7 +50,6 @@ class button {
         this.freq = freq / 1
         this.tick = tick
         this.btnElem = document.querySelector(`#btn${id}`)
-        this.lastClick = 0
         this.sound = new Pizzicato.Sound({
             source: 'wave',
             options: {
@@ -62,6 +61,10 @@ class button {
 
             }
         })
+    }
+    displayNote() {
+        this.note = findClosestNote(this.freq)
+        this.btnElem.innerHTML = `<h3>${this.note}</h3>`
     }
     playSound() {
         this.sound.play()
@@ -85,7 +88,7 @@ class button {
 
 function constructBtns(scale, tick, wave) {
     let buttons = []
-    for (let i = 0; i <= 9; i++) {
+    for (let i = 1; i <= 9; i++) {
         let btnWave = ""
         if (wave == "rand") {
             var randWave = waveforms[Math.floor(Math.random() * waveforms.length)]
@@ -93,7 +96,9 @@ function constructBtns(scale, tick, wave) {
         } else {
             btnWave = wave
         }
-        buttons.push(new button(i, scale[i - 1], tick, btnWave))
+        let newBtn = new button(i, scale[i - 1], tick, btnWave)
+        newBtn.displayNote()
+        buttons.push(newBtn)
     }
     return buttons
 }
@@ -118,7 +123,7 @@ class Game {
         this.listen = false
         this.moves.forEach((move, i) => {
             setTimeout(() => {
-                this.buttons[move].activate()
+                this.buttons[move - 1].activate()
             }, 1200 + 2 * i * this.tickrate)
         })
         this.listen = true
@@ -143,7 +148,7 @@ class Game {
         let flashMoves = [8, 7, 6, 5, 4, 3, 2, 1]
         flashMoves.forEach((move, i) => {
             setTimeout(() => {
-                this.buttons[move].activate()
+                this.buttons[move - 1].activate()
             }, 2 * i * this.tickrate / 2.5)
         })
         this.listen = true
@@ -172,10 +177,7 @@ _dom_.gameButtons.addEventListener('click', (e) => {
     } else {
         let id = e.target.id
         let numID = Number(id.slice(3, 4))
-        currGame.buttons[numID].activate()
-        let noteFreq = currGame.buttons[numID].freq
-        let matchedNote = findClosestNote(noteFreq)
-        console.log(matchedNote)
+        currGame.buttons[numID - 1].activate()
         if (currGame.gameState == "ongoing") {
             ret = currGame.recordMove(numID)
             if (ret == "correct") {
