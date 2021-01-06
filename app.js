@@ -177,7 +177,6 @@ _dom_.gameButtons.addEventListener('click', (e) => {
     if (e.target == _dom_.gameButtons) {
         return
     } else if (e.target.tagName === 'H3') {
-        console.log("test")
         var targ = e.target.parentNode
     } else {
         var targ = e.target
