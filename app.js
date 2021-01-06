@@ -5,14 +5,45 @@ var _dom_ = {
     "waveSelect": document.querySelector("#waves"),
     "score": document.querySelector("#score")
 }
-var scales = {
+const scales = {
     "pentatonic": [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99],
     "ionian": [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33],
     "dorian": [261.63, 293.66, 311.13, 349.23, 392.00, 440.00, 466.16, 523.25, 587.33],
     "phrygian": [261.63, 277.18, 329.63, 349.23, 392.00, 415.30, 466.16, 523.25, 554.36]
 }
+const chromScale = {
+    "C": 16.35,
+    "D♭": 17.32,
+    "D": 18.35,
+    "E♭": 19.45,
+    "E": 20.60,
+    "F": 21.83,
+    "G♭": 23.12,
+    "G": 24.50,
+    "A♭": 25.96,
+    "A": 27.50,
+    "B♭": 29.14,
+    "B": 30.87,
+}
 
 var waveforms = ["sine", "square", "triangle", "sawtooth"]
+
+function findClosestNote(noteFreq) {
+    let lowRem = 0.5
+    let matchedNote = ""
+    for (var note in chromScale) {
+        let rem = noteFreq % chromScale[note]
+            //console.log(`${note} = ${rem}`)
+        if (rem < lowRem) {
+            lowRem = rem
+            matchedNote = note
+        }
+        if (chromScale[note] - rem < 0.1) {
+            matchedNote = note
+        }
+    }
+    return matchedNote
+}
 class button {
     constructor(id, freq, tick, wave) {
         this.id = id
@@ -142,6 +173,9 @@ _dom_.gameButtons.addEventListener('click', (e) => {
         let id = e.target.id
         let numID = Number(id.slice(3, 4))
         currGame.buttons[numID].activate()
+        let noteFreq = currGame.buttons[numID].freq
+        let matchedNote = findClosestNote(noteFreq)
+        console.log(matchedNote)
         if (currGame.gameState == "ongoing") {
             ret = currGame.recordMove(numID)
             if (ret == "correct") {
