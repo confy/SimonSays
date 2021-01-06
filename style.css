@@ -93,6 +93,7 @@ h1 {
 
 .gameBottom h3 {
     margin: 0;
+    padding: 0;
 }
 
 .gameBottom select {

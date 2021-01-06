@@ -177,22 +177,26 @@ _dom_.reset.addEventListener('click', () => {
 _dom_.gameButtons.addEventListener('click', (e) => {
     if (e.target == _dom_.gameButtons) {
         return
+    } else if (e.target.tagName === 'H3') {
+        console.log("test")
+        var targ = e.target.parentNode
     } else {
-        let id = e.target.id
-        let numID = Number(id.slice(3, 4))
-        currGame.buttons[numID - 1].activate()
-        if (currGame.gameState == "ongoing") {
-            ret = currGame.recordMove(numID)
-            if (ret == "correct") {
-                return
-            } else if (ret == "lastMove") {
-                _dom_.score.innerHTML = `Score: ${currGame.score}`
-                currGame.addMove()
-                setTimeout(currGame.playMoves(), 2000)
+        var targ = e.target
+    }
+    let id = targ.id
+    let numID = Number(id.slice(3, 4))
+    currGame.buttons[numID - 1].activate()
+    if (currGame.gameState == "ongoing") {
+        ret = currGame.recordMove(numID)
+        if (ret == "correct") {
+            return
+        } else if (ret == "lastMove") {
+            _dom_.score.innerHTML = `Score: ${currGame.score}`
+            currGame.addMove()
+            setTimeout(currGame.playMoves(), 2000)
 
-            } else {
-                currGame.btnFlash()
-            }
+        } else {
+            currGame.btnFlash()
         }
     }
 })
