@@ -1,4 +1,5 @@
 var _dom_ = {
+    "body": document.querySelector("body"),
     "gameButtons": document.querySelector(".gameButtons"),
     "reset": document.querySelector("#reset"),
     "scaleSelect": document.querySelector("#scales"),
